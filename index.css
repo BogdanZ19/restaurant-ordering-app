@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: "Smythe", system-ui;
+}
+
+header {
+    margin-bottom: 22px;
+}
+
+p {
+    margin: 8px 0;
+}
+
+h3 {
+    margin: 0;
+    font-size: 28px;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.content {
+    margin: 0 auto;
+    width: 600px;
+    border: 2px solid black;
+}
+
+.menu {
+    margin: 0 46px;
+    display: flex;
+}
+
+
+.menu-item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 45px 0px;
+    margin: 0 50px;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.item-picture {
+    font-size: 70px;
+    margin-right: 31px;
+}
+
+
+
+.add-remove-display {
+    margin-left: auto
+}
+
+.hide {
+    display: none;
+}
+
+.add-remove-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.display-quantity {
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: border-color 0.2s ease;
+}
+
+.bill {
+    margin: 0 50px;
+    text-align: center;
+}
+
+.bill-list-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill-list-item div {
+    display: flex;
+}
+
+
+#bill-title {
+    margin-bottom: 65px;
+}
+
+/* Buttons */
+
+button:hover, 
+button:focus {
+    cursor: pointer;
+}
+
+.add-btn,
+.remove-btn {
+    margin-left: auto;
+    margin-bottom: auto;
+    background-color: white;
+    height: 50px;
+    width: 50px;
+    border: 1.5px solid #DEDEDE;
+    border-radius: 50%;
+}
+
+.add-btn:hover,
+.add-btn:focus {
+    background-color: #16DB99;
+    border-color: #393333;
+}
+
+.remove-btn:hover,
+.remove-btn:focus {
+    background-color: #F43F5E;
+    border-color: #393333;
+}
+
+.remove-bill-btn {
+    font-size: 12px;
+    color: #BBBBBB;
+    border: none;
+    background-color: white;
+    margin-left: 15px;
+}
+
+.remove-bill-btn:hover,
+.remove-bill-btn:focus{
+    color: #F43F5E;
+}
+
+/* Typography */
+
+.menu-item-info, .price{
+    font-size: 20px;
+}
+
+.menu-item-info h3 {
+    font-size: 28px;
+}
+
+.gray-text {
+    color: #8B8B8B;
+    font-size: 16px;
+}
