@@ -18,7 +18,7 @@ function handleAddBtn(btnId) {
 }
 
 function handleRemoveBtn(btnId) {
-    if(menuArray[btnId].quantity > 0) {
+    if (menuArray[btnId].quantity > 0) {
         menuArray[btnId].quantity--
         renderMenu()
     }
@@ -75,11 +75,12 @@ function getBillHtml(menuArray) {
     })
 
     let hideClass = addedItems.length > 0 ? '' : 'hide'
-    
+    let totalPrice = 0
     let billHtml = `<h3 id="bill-title" class="${hideClass}">Your order</h3>`
     if (addedItems) {
         addedItems.forEach((item) => {
-            if(item.quantity > 0) {
+            if (item.quantity > 0) {
+                totalPrice += item.price
                 billHtml += `
                 <li class="bill-list-item">
                     <div>
@@ -93,6 +94,16 @@ function getBillHtml(menuArray) {
                 `
             }
         })
+
+        billHtml += `
+        <div class="${hideClass}">
+            <div class="bill-result">
+                <h3>Total Price:</h3>
+                <p class="price">$${totalPrice}</p>
+            </div>
+            <button class="complete-order-btn">Complete order</button>
+        </div>
+        `
 
         return billHtml
     }

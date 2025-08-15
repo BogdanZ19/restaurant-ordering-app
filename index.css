@@ -14,6 +14,7 @@ p {
 h3 {
     margin: 0;
     font-size: 28px;
+    font-weight: 400;
 }
 
 ul {
@@ -79,6 +80,7 @@ ul {
 .bill-list-item {
     display: flex;
     justify-content: space-between;
+    border-bottom: 22px;
 }
 
 .bill-list-item div {
@@ -88,6 +90,14 @@ ul {
 
 #bill-title {
     margin-bottom: 65px;
+}
+
+.bill-result {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid black;
+    padding-top: 14px;
+    margin-top: 10px;
 }
 
 /* Buttons */
@@ -131,6 +141,17 @@ button:focus {
 .remove-bill-btn:hover,
 .remove-bill-btn:focus{
     color: #F43F5E;
+}
+
+.complete-order-btn {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
+    padding: 18px 0;
+    color: #FFFFFF;
+    background-color: #16DB99;
+    margin-top: 50px
 }
 
 /* Typography */
