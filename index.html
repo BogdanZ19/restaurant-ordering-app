@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Smythe&display=swap');
@@ -24,6 +23,19 @@
             <section id="bill" class="bill">
                 <ul id="bill-content"></ul>
             </section>
+            <section class="modal hide" id="modal">
+                <p class="modal-title">Enter card details</p>
+                <form id="card-details-form" class="card-details-form">
+                    <input type="text" name="name-input" id="name-input" placeholder="Enter your name">
+                    <input type="number" name="card-number-input" id="card-number-input" placeholder="Enter card number">
+                    <input type="number" name="cvv-input" id="cvv-input" placeholder="Enter cvv">
+                </form>
+                <button class="pay-btn" id="pay-btn">
+                    Pay
+                </button>
+                <button class="close-modal-btn" id="close-modal-btn">X</button>
+            </section>
+            <section id="thanks-section" class="hide"></section>
         </main>
     </div>
     <script src="index.js" type="module"></script>

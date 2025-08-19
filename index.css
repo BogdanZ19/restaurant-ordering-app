@@ -24,7 +24,6 @@ ul {
 .content {
     margin: 0 auto;
     width: 600px;
-    border: 2px solid black;
 }
 
 .menu {
@@ -48,13 +47,12 @@ ul {
 }
 
 
-
 .add-remove-display {
     margin-left: auto
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .add-remove-display {
@@ -66,11 +64,13 @@ ul {
 .display-quantity {
     margin-top: 10px;
     border: 2px solid #ccc;
-    padding: 4px 10px;
+    padding: 10px 15px;
     border-radius: 6px;
     font-weight: bold;
     transition: border-color 0.2s ease;
 }
+
+/* Bill */
 
 .bill {
     margin: 0 50px;
@@ -100,7 +100,63 @@ ul {
     margin-top: 10px;
 }
 
-/* Buttons */
+/* Modal */
+.modal {
+    position: fixed;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
+    width: 500px;
+    padding: 0 25px 30px 25px;
+    background-color: white;
+    box-shadow: 5px 5px 255px rgba(0, 0, 0, 0.2); /* This creates the shadow */
+}
+
+.modal-title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 22px;
+}
+
+.card-details-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-details-form input {
+    height: 70px;
+    width: 80%;
+    margin: 23px auto 0px auto;
+}
+
+.pay-btn {
+    display: block;
+    height: 70px;
+    background-color: #16DB99;
+    width: 80%;
+    margin: 45px auto 0 auto;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.close-modal-btn:hover,
+.close-modal-btn:focus {
+    color: #F43F5E;
+    border-color: #F43F5E;
+}
+
+/* Menu and Bill Buttons */
 
 button:hover, 
 button:focus {
@@ -112,10 +168,11 @@ button:focus {
     margin-left: auto;
     margin-bottom: auto;
     background-color: white;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     border: 1.5px solid #DEDEDE;
     border-radius: 50%;
+    font-size: 10px;
 }
 
 .add-btn:hover,
@@ -153,6 +210,22 @@ button:focus {
     background-color: #16DB99;
     margin-top: 50px
 }
+.complete-order-btn:hover,
+.complete-order-btn:focus {
+    background-color: #059669;
+}
+
+/* Thanks-section */
+#thanks-section {
+    width: 500px;
+    height: 120px;
+    background-color: #ECFDF5;
+    text-align: center;
+    margin: 45px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* Typography */
 
@@ -167,4 +240,32 @@ button:focus {
 .gray-text {
     color: #8B8B8B;
     font-size: 16px;
+}
+
+input, button {
+    font-family: inherit;
+}
+
+.modal {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.card-details-form input {
+    font-size: 20px;
+}
+
+.pay-btn {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+}
+
+#thanks-section {
+    font-size: 32px;
+    color: #065F46;
 }

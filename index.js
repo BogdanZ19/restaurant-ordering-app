@@ -1,6 +1,6 @@
-import { menuArray } from "./data.js";
-
+import { menuArray } from "./data.js"
 const billContent = document.getElementById('bill-content')
+const thanksSection = document.getElementById('thanks-section')
 
 document.addEventListener('click', (e) => {
     if (e.target.dataset.addBtn) {
@@ -9,26 +9,54 @@ document.addEventListener('click', (e) => {
         handleRemoveBtn(e.target.dataset.removeBtn)
     } else if (e.target.dataset.removeBillBtn) {
         handleRemoveBillBtn(e.target.dataset.removeBillBtn)
+    } else if (e.target.id === "close-modal-btn") {
+        handleCloseModalBtnClick(e.target.id)
+    } else if (e.target.id === 'complete-order-btn') {
+        handleCompleteOrderBtn()
+    } else if (e.target.id === 'pay-btn') {
+        handlePayBtnClick()
     }
 })
 
 function handleAddBtn(btnId) {
     menuArray[btnId].quantity++
-    renderMenu()
+    renderPage()
 }
 
 function handleRemoveBtn(btnId) {
     if (menuArray[btnId].quantity > 0) {
         menuArray[btnId].quantity--
-        renderMenu()
+        renderPage()
     }
 }
 
 function handleRemoveBillBtn(btnId) {
     menuArray[btnId].quantity = 0
-    renderMenu()
+    renderPage()
 }
 
+function handleCompleteOrderBtn() {
+    document.getElementById('modal').classList.toggle('hide')
+}
+
+function handleCloseModalBtnClick(btnId) {
+    document.getElementById(btnId).parentElement.classList.toggle('hide')
+}
+
+function handlePayBtnClick() {
+    document.getElementById('modal').classList.toggle('hide')
+    document.getElementById('bill').classList.toggle('hide')
+    menuArray.forEach(item => item.quantity = 0)
+    renderPage(document.querySelector("input[name=name-input]").value)
+}
+
+function getThanksHtml(clientName) {
+    return `
+    <div>
+        Thanks, ${clientName}! Your order is on its way!
+    </div>
+    `
+}
 
 function getMenuHtml(menuArray) {
     let menuHtml = ``
@@ -57,8 +85,12 @@ function getMenuHtml(menuArray) {
             </div>
             <div class="add-remove-display">
                 <div>
-                    <button class="add-btn" data-add-btn="${item.id}"> + </button>
-                    <button class="remove-btn ${hideClass}" data-remove-btn="${item.id}" id="remove-btn-${item.id}"> - </button>
+                    <button class="add-btn" data-add-btn="${item.id}"> 
+                        &#10133; 
+                    </button>
+                    <button class="remove-btn ${hideClass}" data-remove-btn="${item.id}" id="remove-btn-${item.id}">
+                        &#10134;
+                    </button>
                 </div>
                 <span class="display-quantity ${hideClass}">${item.quantity}</span>
             </div>
@@ -101,7 +133,7 @@ function getBillHtml(menuArray) {
                 <h3>Total Price:</h3>
                 <p class="price">$${totalPrice}</p>
             </div>
-            <button class="complete-order-btn">Complete order</button>
+            <button class="complete-order-btn" id="complete-order-btn">Complete order</button>
         </div>
         `
 
@@ -109,9 +141,14 @@ function getBillHtml(menuArray) {
     }
 }
 
-function renderMenu() {
+
+function renderPage(clientName = '') {
     document.getElementById('menu-content').innerHTML = getMenuHtml(menuArray)
     billContent.innerHTML = getBillHtml(menuArray)
+    if (clientName != '') {
+        thanksSection.innerHTML = getThanksHtml(clientName)
+        thanksSection.classList.toggle('hide')
+    }
 }
 
-renderMenu()
+renderPage()
