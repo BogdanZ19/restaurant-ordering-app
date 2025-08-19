@@ -3,6 +3,7 @@ const billContent = document.getElementById('bill-content')
 const thanksSection = document.getElementById('thanks-section')
 let quantityArr = []
 let quantityArrFromLocalStorage = JSON.parse(localStorage.getItem('quantityArr'))
+let refresh = false
 
 if (quantityArrFromLocalStorage) {
     quantityArr = quantityArrFromLocalStorage
@@ -183,6 +184,9 @@ function renderPage(clientName = '') {
     if (clientName != '') {
         thanksSection.innerHTML = getThanksHtml(clientName)
         thanksSection.classList.toggle('hide')
+        document.addEventListener('click', () => {
+            window.location.reload()
+        }) 
     }
 }
 
