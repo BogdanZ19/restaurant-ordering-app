@@ -1,6 +1,23 @@
 import { menuArray } from "./data.js"
 const billContent = document.getElementById('bill-content')
 const thanksSection = document.getElementById('thanks-section')
+let quantityArr = []
+let quantityArrFromLocalStorage = JSON.parse(localStorage.getItem('quantityArr'))
+
+if (quantityArrFromLocalStorage) {
+    quantityArr = quantityArrFromLocalStorage
+}
+
+if (quantityArr.length === 0) {
+    menuArray.forEach((item) => {
+        quantityArr.push({
+            id: item.id,
+            quantity: 0
+        })
+    })
+}
+
+
 
 document.addEventListener('click', (e) => {
     if (e.target.dataset.addBtn) {
@@ -19,19 +36,24 @@ document.addEventListener('click', (e) => {
 })
 
 function handleAddBtn(btnId) {
-    menuArray[btnId].quantity++
+    getQuantityItem(btnId).quantity++
+    console.log(getQuantityItem(btnId).quantity)
+    setLocal()
     renderPage()
 }
 
 function handleRemoveBtn(btnId) {
-    if (menuArray[btnId].quantity > 0) {
-        menuArray[btnId].quantity--
+    let item = getQuantityItem(btnId)
+    if (item.quantity > 0) {
+        item.quantity--
+        setLocal()
         renderPage()
     }
 }
 
 function handleRemoveBillBtn(btnId) {
-    menuArray[btnId].quantity = 0
+    getQuantityItem(btnId).quantity = 0
+    setLocal()
     renderPage()
 }
 
@@ -46,9 +68,20 @@ function handleCloseModalBtnClick(btnId) {
 function handlePayBtnClick() {
     document.getElementById('modal').classList.toggle('hide')
     document.getElementById('bill').classList.toggle('hide')
-    menuArray.forEach(item => item.quantity = 0)
+    quantityArr.forEach(item => item.quantity = 0)
+    setLocal()
     renderPage(document.querySelector("input[name=name-input]").value)
 }
+
+function getQuantityItem(itemId)
+{
+    return quantityArr.find(item => item.id == itemId)
+}
+
+function setLocal() {
+    localStorage.setItem('quantityArr', JSON.stringify(quantityArr))
+}
+
 
 function getThanksHtml(clientName) {
     return `
@@ -58,12 +91,13 @@ function getThanksHtml(clientName) {
     `
 }
 
+
 function getMenuHtml(menuArray) {
     let menuHtml = ``
     menuArray.forEach((item) => {
         const removeBtn = document.getElementById(`remove-btn-${item.id}`)
         let hideClass = ''
-        if (item.quantity === 0) {
+        if (getQuantityItem(item.id).quantity === 0) {
             hideClass = 'hide'
         }
 
@@ -92,7 +126,7 @@ function getMenuHtml(menuArray) {
                         &#10134;
                     </button>
                 </div>
-                <span class="display-quantity ${hideClass}">${item.quantity}</span>
+                <span class="display-quantity ${hideClass}">${getQuantityItem(item.id).quantity}</span>
             </div>
         </li>
         `
@@ -103,30 +137,31 @@ function getMenuHtml(menuArray) {
 
 function getBillHtml(menuArray) {
     let addedItems = menuArray.filter((item) => {
-        return item.quantity != 0
+        return getQuantityItem(item.id).quantity != 0
     })
-
+    
     let hideClass = addedItems.length > 0 ? '' : 'hide'
     let totalPrice = 0
     let billHtml = `<h3 id="bill-title" class="${hideClass}">Your order</h3>`
     if (addedItems) {
         addedItems.forEach((item) => {
-            if (item.quantity > 0) {
-                totalPrice += item.price
+            let quantity = getQuantityItem(item.id).quantity
+            if ( quantity > 0) {
+                totalPrice += item.price * quantity
                 billHtml += `
                 <li class="bill-list-item">
                     <div>
-                        <h3>${item.quantity + "x " + item.name}</h3>
+                        <h3>${quantity + "x " + item.name}</h3>
                         <button class='remove-bill-btn' data-remove-bill-btn="${item.id}">remove</button>
                     </div>
                     <p class="price">
-                        $${item.price}
+                        $${item.price * quantity}
                     </p>
                 </li>
                 `
             }
         })
-
+        
         billHtml += `
         <div class="${hideClass}">
             <div class="bill-result">
